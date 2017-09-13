@@ -5,14 +5,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
+import android.widget.Toolbar;
 
 import com.google.android.gms.awareness.Awareness;
 import com.google.android.gms.awareness.fence.AwarenessFence;
@@ -179,10 +189,15 @@ public class MapsActivity extends FragmentActivity {
         this.fenceDataList.add(fenceDataJS);
         setFenceEvent(fenceService, "JS", fenceDataJS, fenceTypeList);
 
-
+        Map<String, Object> fenceDataJTPARK = new HashMap<String, Object>();
+        fenceDataJTPARK.put("latitude"  ,   37.510408);
+        fenceDataJTPARK.put("longitude" ,   127.043666);
+        fenceDataJTPARK.put("radius"    ,   100.0);
+        fenceDataJTPARK.put("duringtime",   10000L);
+        this.fenceDataList.add(fenceDataJTPARK);
+        setFenceEvent(fenceService, "JTPARK", fenceDataJTPARK, fenceTypeList);
 
     }
-
 
     public void setFenceEvent( FenceService fenceService, String fenceKey,  Map<String, Object> fenceData, ArrayList<String> fenceTypeList){
 
@@ -259,9 +274,11 @@ public class MapsActivity extends FragmentActivity {
                             else if(fenceKey.contains("KD_") == true){
                                 fencingArea = "공덕역 5호선, 6호선 환승지역 반경 150m";
                             }
-
                             else if(fenceKey.contains("JJ_") == true){
                                 fencingArea = "증산역 6호선 지역 반경 150m";
+                            }
+                            else if(fenceKey.contains("JTPARK_") == true){
+                                fencingArea = "선정릉역 9호선 지역 반경 150m";
                             }
 
                             this.activity.fCMControl.sendMessage(fencingType, fencingArea);
@@ -412,9 +429,9 @@ public class MapsActivity extends FragmentActivity {
      * 지도위에 위치 표시
      */
     public void setPosition(GoogleMap mGoogleMap){
-        LatLng sphPosition = new LatLng(37.5237446,126.926865);
+        LatLng sphPosition = new LatLng(37.510408, 127.043666); // Herit 37.510408, 127.043666 // SPH 37.5237446,126.926865
 
-        MarkerOptions markerOptions = new MarkerOptions().position(sphPosition).title("Marker in SPH");
+        MarkerOptions markerOptions = new MarkerOptions().position(sphPosition).title("Marker in Herit");
         Marker marker = mGoogleMap.addMarker(markerOptions);
         marker.showInfoWindow();
 
@@ -566,9 +583,14 @@ public class MapsActivity extends FragmentActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // TODO Auto-generated method stub
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return super.onCreateOptionsMenu(menu);
+
+        //getMenuInflater().inflate(R.menu.main, menu);
+        //return true;
     }
+
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {

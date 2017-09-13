@@ -61,7 +61,7 @@ public class FCMControl {
                     httpURLConnection.setDoOutput(true);
                     httpURLConnection.setRequestMethod("POST");
                     httpURLConnection.setRequestProperty("Content-Type", "application/json");
-                    httpURLConnection.setRequestProperty("Authorization", "key=AIzaSyBxpPbB1kD6sobRJI_iwFmtysJC3fTX_NY");
+                    httpURLConnection.setRequestProperty("Authorization", "key=AIzaSyCcFcuhYIfcTy-vWPgQAyY3O5DFscCJPis");
                     httpURLConnection.connect();
 
                     JSONObject notificationParam = new JSONObject();

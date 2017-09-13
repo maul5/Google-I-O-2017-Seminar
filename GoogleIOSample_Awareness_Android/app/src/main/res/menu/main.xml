@@ -1,20 +1,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.sphinfo.sample.MainActivity" >
+    tools:context=".MapsActivity" >
 
     <item
         android:id="@+id/lastknownlocation"
         android:orderInCategory="100"
-        android:title="@string/action_lastknownlocation"/>
+        android:title="@string/action_lastknownlocation"
+        app:showAsAction="always|withText"/>
 
     <item
         android:id="@+id/requestLocationUpdates"
         android:orderInCategory="100"
-        android:title="@string/action_requestLocationUpdates"/>
+        android:title="@string/action_requestLocationUpdates"
+        app:showAsAction="always|withText"/>
 
     <item
         android:id="@+id/removeLocationUpdates"
         android:orderInCategory="100"
-        android:title="@string/action_removeLocationUpdates"/>
+        android:title="@string/action_removeLocationUpdates"
+        app:showAsAction="always|withText"/>
 
 </menu>

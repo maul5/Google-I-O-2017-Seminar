@@ -187,17 +187,27 @@
         		var circleJS = new Circle(map, circleOptions);
         		circleJS.setCenter(37.584007, 126.909778);
         		circleJS.draw();
+
+                var circleJTPARK = new Circle(map, circleOptions);
+                circleJTPARK.setCenter(37.510408, 127.043666);
+                circleJTPARK.draw();
         		
         		$Marker.init(map);
       		}
     	</script>
   
-    	<script src="https://maps.googleapis.com/maps/api/js?key=API_KEY&region=KR&callback=initMap" async defer></script>
-    	
+    	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcFcuhYIfcTy-vWPgQAyY3O5DFscCJPis&region=KR&callback=initMap" async defer></script>
+
+		<!--
     	<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.6.2/firebase-app.js"></script>
 		<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.6.2/firebase-database.js"></script>
 		<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.6.2/firebase-messaging.js"></script>
-		
+		-->
+		<script src="https://www.gstatic.com/firebasejs/4.1.1/firebase.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.1.1/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.1.1/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.1.1/firebase-database.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.1.1/firebase-messaging.js"></script>
 		
 		
 		<script type="text/javascript">
@@ -207,11 +217,11 @@
 				var postion  = trackingData.position;
 				var detected = trackingData.detected;
 				
-				/* console.log("==> " + key + " : trackingData : ", trackingData)
+				console.log("==> " + key + " : trackingData : ", trackingData)
 				console.log("==> " + key + " : postion : ", postion)
 				console.log("==> " + key + " : detected : ", detected)
 				console.log("============================================================")
-				 */
+
 				var dateTimeTemp = new Date(parseInt(key));
 				
 				var years = new String(dateTimeTemp.getFullYear());
@@ -363,17 +373,17 @@
 		<script type="text/javascript">
 			// Initialize Firebase
 			// TODO: Replace with your project's customized code snippet
+            // jtpark
 			var config = {
-			    apiKey: "set Firebase Api Key",
-			    databaseURL: "set Firebase Database Url",
-			    messagingSenderId : "set Message Sender Id"
+			    apiKey: "AIzaSyCcFcuhYIfcTy-vWPgQAyY3O5DFscCJPis",
+			    databaseURL: "https://gio-test-jtpark.firebaseio.com",
+			    messagingSenderId : "707752647284"
 		 	};
 		  	
 			firebase.initializeApp(config);
 			
 			var database = firebase.database();
-			
-			
+
 			var PREFIX_DATA_STORAGE_TRACKING = "Tracking";
 			database.ref(PREFIX_DATA_STORAGE_TRACKING).on('value', function(snapshot){
 				var trackingList = snapshot.val();
@@ -430,7 +440,8 @@
 				  	console.log('Notification permission granted.');
 				  	// TODO(developer): Retrieve an Instance ID token for use with FCM.
 				  	// ...
-				  	setTokenInfo();
+					// jtpark
+				  	//setTokenInfo();
 				})
 				.catch(function(err) {
 				  console.log('Unable to get permission to notify.', err);
@@ -495,7 +506,8 @@
 			    httpRequest.open("POST", 'https://fcm.googleapis.com/fcm/send', true);
 			    
 			    httpRequest.setRequestHeader('Content-Type', 'application/json');
-			    httpRequest.setRequestHeader('Authorization', ' key=AIzaSyBxpPbB1kD6sobRJI_iwFmtysJC3fTX_NY');
+			    // jtpark
+			    httpRequest.setRequestHeader('Authorization', ' key=AIzaSyCcFcuhYIfcTy-vWPgQAyY3O5DFscCJPis');
 			    
 			    var param =  {
 			    	"notification": {
